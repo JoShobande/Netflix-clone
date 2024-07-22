@@ -5,7 +5,5 @@ export default function Home() {
     <main >
         Netflix clone
     </main>
-
-    // 9:57
   );
 }
