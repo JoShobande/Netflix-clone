@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
-      {/* 1:14:28 */}
+      {/* 1:19:21  */}
     </html>
   );
 }

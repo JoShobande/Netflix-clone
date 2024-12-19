@@ -4,11 +4,11 @@ import Input from "@components/components/Input"
 import axios from "axios"
 import Image from "next/image"
 import { useCallback, useState } from "react"
-
+import {signIn} from 'next-auth/react'
 
 const Auth = () => {
 
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('') 
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
 
@@ -29,6 +29,19 @@ const Auth = () => {
             console.log(error)
         }
     },[email, name, password])
+
+    const login = useCallback(async()=>{
+        try{
+            await signIn('credentials',{
+                email,
+                password,
+                redirect: false,
+                callbackUrl:'/'
+            })
+        }catch(error){
+            console.log(error)
+        }
+    },[email, password])
 
     return(
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
@@ -78,6 +91,7 @@ const Auth = () => {
                         </div>
                         <button
                             className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'
+                            onClick={variant === 'login' ? login : register}
                         >
                             {variant == 'login'? 'Login' : 'Sign up'}
                         </button>
